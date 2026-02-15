@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Upload Result</h2>
+  <p>File: <strong>{{ filename }}</strong></p>
+  <p>Imported {{ count }} records.</p>
+
+  <p><a href="/">Back to main page</a></p>
+
+  <h3>Preview</h3>
+  {% if records and columns %}
+    <table>
+      <thead>
+        <tr>
+          {% for col in columns %}
+            <th>{{ col }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in records %}
+          <tr>
+            {% for col in columns %}
+              <td>{{ r.get(col, "") }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No data to preview.</p>
+  {% endif %}
+{% endblock %}
